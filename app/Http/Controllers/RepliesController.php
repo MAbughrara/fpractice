@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Replay;
+use App\Reply;
 use Illuminate\Http\Request;
 
-class ReplayController extends Controller
+class RepliesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,7 +33,7 @@ class ReplayController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
     }
@@ -41,10 +41,10 @@ class ReplayController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Replay  $replay
+     * @param  \App\Reply  $Reply
      * @return \Illuminate\Http\Response
      */
-    public function show(Replay $replay)
+    public function show(Reply $Reply)
     {
         //
     }
@@ -52,10 +52,10 @@ class ReplayController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Replay  $replay
+     * @param  \App\Reply  $Reply
      * @return \Illuminate\Http\Response
      */
-    public function edit(Replay $replay)
+    public function edit(Reply $Reply)
     {
         //
     }
@@ -64,10 +64,10 @@ class ReplayController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Replay  $replay
+     * @param  \App\Reply  $Reply
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Replay $replay)
+    public function update(Reply $Reply)
     {
         //
     }
@@ -75,10 +75,10 @@ class ReplayController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Replay  $replay
+     * @param  \App\Reply  $Reply
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Replay $replay)
+    public function destroy(Reply $Reply)
     {
         //
     }

@@ -31,7 +31,7 @@ $factory->define(App\Thread::class,function (Faker $faker){
         'body'=>$faker->paragraph,
     ];
 });
-$factory->define(App\Replay::class,function (Faker $faker){
+$factory->define(App\Reply::class,function (Faker $faker){
     return [
         'user_id'=> function(){
         return factory('App\User')->create()->id;
