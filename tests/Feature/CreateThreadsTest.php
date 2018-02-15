@@ -20,6 +20,17 @@ class CreateThreadsTest extends TestCase
         $this->post('/threads',$thread->toArray());
 
     }
+    /**
+     * @test
+     */
+
+    function gusts_can_not_see_create_page(){
+
+        $this->withExceptionHandling()
+            ->get('/threads/create')
+            ->assertRedirect('/login');
+
+    }
 
     /**
      * @test
