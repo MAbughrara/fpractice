@@ -15,6 +15,10 @@ class Thread extends Model
         return '/threads/' . $this->id;
     }
 
+    public function channel(){
+        return $this->belongsTo(Channel::class,'channel_id');
+    }
+
     public function replies()
     {
         return $this->hasMany(Reply::class);

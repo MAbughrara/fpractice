@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use function Symfony\Component\Console\Tests\Command\createClosure;
 use Tests\TestCase;
 
 class CreateThreadsTest extends TestCase
@@ -13,24 +14,18 @@ class CreateThreadsTest extends TestCase
      * @test
      */
 
-    function gust_can_not_create_thread(){
-
-        $this->expectException('Illuminate\Auth\AuthenticationException');
-        $thread= make('App\Thread');
-        $this->post('/threads',$thread->toArray());
-
-    }
-    /**
-     * @test
-     */
-
-    function gusts_can_not_see_create_page(){
+    function gusts_can_not_create_thread(){
 
         $this->withExceptionHandling()
+
             ->get('/threads/create')
             ->assertRedirect('/login');
 
+        $this->post('/threads')
+            ->assertRedirect('/login');
+
     }
+
 
     /**
      * @test
