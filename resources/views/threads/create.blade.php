@@ -12,11 +12,11 @@
 
                             <div class="form-group">
                                 <label for="title">Thread Title</label>
-                                <input type="text"  class="form-control">
+                                <input type="text"  name="title" class="form-control" value="{{old('title')}}">
                             </div>
                             <div class="form-group">
                                 <label for="title">Thread body</label>
-                                <textarea name="body"  class="form-control" cols="30" rows="10"></textarea>
+                                <textarea name="body"  class="form-control" cols="30" rows="10">{{old('body')}} </textarea>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">Publish</button>
