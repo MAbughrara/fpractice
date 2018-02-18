@@ -5,6 +5,6 @@ function create($class, $attributes=[]){
 
 }
 function make($class, $attributes=[]){
-    return factory($class)->create($attributes);
+    return factory($class)->make($attributes);
 
 }

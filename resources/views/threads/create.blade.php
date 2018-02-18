@@ -6,14 +6,13 @@
             <div class="col-md-8">
                 <div class="card card-default">
                     <div class="card-header">Crate Forum</div>
-
                     <div class="card-body">
                         <form action="/threads" method="post">
                             {{csrf_field()}}
 
                             <div class="form-group">
                                 <label for="title">Thread Title</label>
-                                <input type="text" name="title" class="form-control">
+                                <input type="text"  class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="title">Thread body</label>
