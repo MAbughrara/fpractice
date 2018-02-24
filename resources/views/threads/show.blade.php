@@ -17,10 +17,11 @@
                     </div>
                 </div>
 
-                @foreach( $thread->replies as $reply)
+                @foreach( $replies as $reply)
                     @include('threads.reply')
                 @endforeach
 
+                {{$replies->links()}}
                 <hr>
                 @if(auth()->check())
 
@@ -37,10 +38,12 @@
             <div class="col-md-4">
                 <div class="card card-default">
                     <div class="card-header">
-                        <a href="#">{{$thread->creator->name}}</a> posted:
-                        {{$thread->title}}
+                        This Thread publish:
+                        {{$thread->created_at->diffForHumans()}}
+                        By:
+                        <a href="#">{{$thread->creator->name}}</a>, and currently
+                         has {{$thread->replies_count}} {{str_plural('comment',$thread->replies_count)}}
                     </div>
-                    some some
                 </div>
             </div>
         </div>
