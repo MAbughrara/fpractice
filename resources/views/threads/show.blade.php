@@ -20,7 +20,6 @@
                 @foreach( $replies as $reply)
                     @include('threads.reply')
                 @endforeach
-
                 {{$replies->links()}}
                 <hr>
                 @if(auth()->check())
