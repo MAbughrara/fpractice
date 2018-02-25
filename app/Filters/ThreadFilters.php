@@ -9,7 +9,7 @@ use App\User;
 class ThreadFilters extends Filters
 {
 
-    protected $filters=['by','channelName'];
+    protected $filters=['by','popular'];
 
     /**
      * @param $username
@@ -20,9 +20,9 @@ class ThreadFilters extends Filters
         $user=User::where('name',$username)->firstOrFail();
         return $this->builder->where('user_id',$user->id);
     }
-    protected function channelName($channelName)
+    protected function popular()
     {
-        $channel=Channel::where('slug',$channelName)->firstOrFail();
-        return $this->builder->where('channel_id',$channel->id);
+        $this->builder->getQuery()->orders=[];
+        return $this->builder->orderBy('replies_count','desc');
     }
 }
