@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use function Symfony\Component\Console\Tests\Command\createClosure;
 use Tests\TestCase;
 
 class CreateThreadsTest extends TestCase
