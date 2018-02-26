@@ -13,10 +13,10 @@ class CreateThreadsTest extends TestCase
      * @test
      */
 
-    function gusts_can_not_create_thread(){
+    function gusts_can_not_create_thread()
+    {
 
         $this->withExceptionHandling()
-
             ->get('/threads/create')
             ->assertRedirect('/login');
 
@@ -30,55 +30,83 @@ class CreateThreadsTest extends TestCase
      * @test
      */
 
-    function a_authenticated_user_can_create_new_forum_threads(){
+    function a_authenticated_user_can_create_new_forum_threads()
+    {
 
         $this->signIn();
 
-        $thread= create('App\Thread');
+        $thread = create('App\Thread');
 
-        $response=$this->post('/threads',$thread->toArray());
-            $this->get( $response->headers->get('location'))
+        $response = $this->post('/threads', $thread->toArray());
+        $this->get($response->headers->get('location'))
             ->assertSee($thread->title)
             ->assertSee($thread->body);
 
 
     }
+
     /**
      * @test
      */
 
-    function a_thread_requires_a_title(){
+    function a_thread_requires_a_title()
+    {
 
-        $this->publishThread(['title'=>null])
+        $this->publishThread(['title' => null])
             ->assertSessionHasErrors('title');
     }
+
     /**
      * @test
      */
 
-    function a_thread_requires_a_body(){
+    function a_thread_requires_a_body()
+    {
 
-        $this->publishThread(['body'=>null])
+        $this->publishThread(['body' => null])
             ->assertSessionHasErrors('body');
     }
- /**
+
+    /**
      * @test
      */
 
-    function a_thread_requires_a_valid_channel(){
-        factory('App\Channel',2)->create();
+    function a_thread_requires_a_valid_channel()
+    {
+        factory('App\Channel', 2)->create();
 
-        $this->publishThread(['channel_id'=>null])
+        $this->publishThread(['channel_id' => null])
             ->assertSessionHasErrors('channel_id');
 
-        $this->publishThread(['channel_id'=>7777])
+        $this->publishThread(['channel_id' => 7777])
             ->assertSessionHasErrors('channel_id');
     }
 
-    public function publishThread($overrides=[]){
+
+    /**
+     * @test
+     */
+
+    function a_authenticated_user_can_delete_threads()
+    {
+        $this->signIn();
+
+        $theard=factory('App\Thread')->create(
+//            ['user_id'=>auth()->id()]
+        );
+
+       $response=$this->json('DELETE',$theard->path());
+
+        $response->assertDatabaseMissing('threads',['id'=>$theard->id]);
+
+    }
+
+
+    public function publishThread($overrides = [])
+    {
         $this->withExceptionHandling()->signIn();
-        $thread=make('App\Thread',$overrides);
-       return $this->post('/threads',$thread->toArray());
+        $thread = make('App\Thread', $overrides);
+        return $this->post('/threads', $thread->toArray());
 
     }
 
