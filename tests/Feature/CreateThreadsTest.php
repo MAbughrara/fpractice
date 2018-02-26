@@ -95,9 +95,11 @@ class CreateThreadsTest extends TestCase
 //            ['user_id'=>auth()->id()]
         );
 
-       $response=$this->json('DELETE',$theard->path());
+        $reply=create('App\Reply',['thread_id'=>$theard->id]);
+       $this->json('DELETE',$theard->path());
 
-        $response->assertDatabaseMissing('threads',['id'=>$theard->id]);
+        $this->assertDatabaseMissing('threads',['id'=>$theard->id]);
+        $this->assertDatabaseMissing('replies',['id'=>$reply->id]);
 
     }
 

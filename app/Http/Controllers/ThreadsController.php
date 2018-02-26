@@ -119,6 +119,7 @@ class ThreadsController extends Controller
      */
     public function destroy($channel,Thread $thread)
     {
+        $thread->replies()->delete();
         $thread->delete();
         return redirect('/threads');
     }
