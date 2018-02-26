@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card card-default">
                     <div class="card-header">
-                        <a href="#">{{$thread->creator->name}}</a> posted:
+                        <a href="/profiles/{{$thread->creator->name}}">{{$thread->creator->name}}</a> posted:
                         {{$thread->title}}</div>
                     <div class="card-body">
                         <article>
@@ -40,7 +40,7 @@
                         This Thread publish:
                         {{$thread->created_at->diffForHumans()}}
                         By:
-                        <a href="#">{{$thread->creator->name}}</a>, and currently
+                        <a href="/profiles/{{$thread->creator->name}}">{{$thread->creator->name}}</a>, and currently
                          has {{$thread->replies_count}} {{str_plural('comment',$thread->replies_count)}}
                     </div>
                 </div>
