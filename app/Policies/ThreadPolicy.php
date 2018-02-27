@@ -10,10 +10,6 @@ class ThreadPolicy
 {
     use HandlesAuthorization;
 
-//
-//    public function before($user){
-//         if($user->name == 'm.abughrara') return true;
-//    }
     /**
      * Determine whether the user can view the thread.
      *
@@ -46,7 +42,6 @@ class ThreadPolicy
      */
     public function update(User $user, Thread $thread)
     {
-//        dd($thread->user_id === $user->id);
         return($thread->user_id == $user->id);
     }
 

@@ -105,9 +105,7 @@ class CreateThreadsTest extends TestCase
 
     function authorized__user_can_delete_threads()
     {
-//        $user=create('App\User');
-//        $admin=  create('App\User',['name'=>'m.abughrara']);
-//        $this->actingAs($admin);
+
         $this->signIn();
 
         $thread = create('App\Thread',['user_id' => auth()->id()]);
