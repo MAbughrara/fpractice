@@ -8,7 +8,7 @@
                     <div class="card-header">Forum Treads</div>
 
                     <div class="card-body">
-                            @foreach($threads as $thread)
+                            @forelse($threads as $thread)
                                 <article>
                                     <div class="level">
                                     <h4 class="flex">
@@ -25,7 +25,9 @@
                                     </div>
 
                                 </article>
-                             @endforeach
+                            @empty
+                                <p>There are no relevant results at this time</p>
+                             @endforelse
 
                     </div>
                 </div>

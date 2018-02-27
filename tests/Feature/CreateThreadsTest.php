@@ -87,20 +87,37 @@ class CreateThreadsTest extends TestCase
      * @test
      */
 
-    function a_authenticated_user_can_delete_threads()
+    function unauthorized_users_cannot_delete_threads()
     {
+        $this->withExceptionHandling();
+
+        $thread = create('App\Thread');
+
+        $this->delete($thread->path())->assertRedirect('/login');
+        $this->signIn();
+        $this->delete($thread->path())->assertStatus(403);
+
+    }
+
+    /**
+     * @test
+     */
+
+    function authorized__user_can_delete_threads()
+    {
+//        $user=create('App\User');
+//        $admin=  create('App\User',['name'=>'m.abughrara']);
+//        $this->actingAs($admin);
         $this->signIn();
 
-        $theard=factory('App\Thread')->create(
-//            ['user_id'=>auth()->id()]
-        );
+        $thread = create('App\Thread',['user_id' => auth()->id()]);
+        $reply = create('App\Reply', ['thread_id' => $thread->id]);
 
-        $reply=create('App\Reply',['thread_id'=>$theard->id]);
-       $this->json('DELETE',$theard->path());
+        $response=$this->json('DELETE',$thread->path());
+        $response->assertStatus(204);
 
-        $this->assertDatabaseMissing('threads',['id'=>$theard->id]);
-        $this->assertDatabaseMissing('replies',['id'=>$reply->id]);
-
+        $this->assertDatabaseMissing('threads', ['id' => $thread->id]);
+        $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
     }
 
 
@@ -109,7 +126,6 @@ class CreateThreadsTest extends TestCase
         $this->withExceptionHandling()->signIn();
         $thread = make('App\Thread', $overrides);
         return $this->post('/threads', $thread->toArray());
-
     }
 
 }
