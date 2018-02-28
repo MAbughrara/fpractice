@@ -29,6 +29,7 @@ trait recordsActivity
     {
         return ['created'];
     }
+
     protected function recordActivity($event)
     {
         $this->activity()->create(
@@ -37,7 +38,6 @@ trait recordsActivity
                 'type' => $this->getActivityType($event),
             ]
         );
-
     }
 
     public function activity()
