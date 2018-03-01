@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\model;
 trait favoritable
 {
 
-
     public function favorites()
     {
         return $this->morphMany(Favorite::class, 'favorited');
