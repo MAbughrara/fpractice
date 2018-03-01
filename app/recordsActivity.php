@@ -23,6 +23,10 @@ trait recordsActivity
             });
         }
 
+        static::deleted(function($model){
+            $model->activity()->delete();
+        });
+
     }
 
     protected static function getActivityToRecord()

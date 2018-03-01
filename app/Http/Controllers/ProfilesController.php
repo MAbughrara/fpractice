@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Activity;
 use App\User;
 
 class ProfilesController extends Controller
@@ -11,19 +12,10 @@ class ProfilesController extends Controller
         return view('profiles.show',
             [
                 'profileUser' => $user,
-                'activities'=>$this->gotActivity($user)
+                'activities'=>Activity::feed($user)
             ]
         );
     }
 
-    /**
-     * @param User $user
-     * @return static
-     */
-    public function gotActivity(User $user)
-    {
-        return  $activities = $user->activities()->latest()->with('subject')->take(50)->get()->groupBy(function ($activities) {
-            return $activities->created_at->format('Y-m-d');
-        });
-    }
+
 }
