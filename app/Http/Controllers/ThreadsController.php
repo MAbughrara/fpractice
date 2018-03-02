@@ -69,7 +69,8 @@ class ThreadsController extends Controller
             'body' => \request('body'),
         ]);
 
-        return redirect($thread->path());
+        return redirect($thread->path())
+            ->with('flash','your thread has been published');
     }
 
     /**
@@ -121,8 +122,6 @@ class ThreadsController extends Controller
     {
 
         $this->authorize('update', $thread);
-
-//        $thread->replies()->delete();
         $thread->delete();
 
         if (request()->wantsJson()) {

@@ -50,7 +50,7 @@ class RepliesController extends Controller
             'user_id'=> auth()->id(),
         ]);
 
-        return back();
+        return back()->with('flash','your reply is here!');
 
     }
 
@@ -96,6 +96,14 @@ class RepliesController extends Controller
      */
     public function destroy(Reply $Reply)
     {
-        //
+
+        $this->authorize('update',$Reply);
+
+
+        $Reply->delete();
+
+
+        return back()->with('flash','comment has gone for good');
+
     }
 }

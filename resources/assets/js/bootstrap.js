@@ -1,6 +1,8 @@
 
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
+window.Vue = require('vue');
+
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -37,6 +39,11 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+window.events= new Vue();
+window.flash= function (message) {
+    window.events.$emit('flash',message);
+};
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
