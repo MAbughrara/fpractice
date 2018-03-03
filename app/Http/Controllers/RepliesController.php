@@ -83,9 +83,14 @@ class RepliesController extends Controller
      * @param  \App\Reply  $Reply
      * @return \Illuminate\Http\Response
      */
-    public function update(Reply $Reply)
+    public function update(Reply $reply)
     {
-        //
+        $this->authorize('update',$reply);
+        $reply->update(request()->all());
+        if (request()->expectsJson()){
+            return response(['status'=>'Reply deleted']);
+        }
+        return back()->with('flash','updated successfully');
     }
 
     /**
@@ -96,14 +101,8 @@ class RepliesController extends Controller
      */
     public function destroy(Reply $Reply)
     {
-
         $this->authorize('update',$Reply);
-
-
         $Reply->delete();
-
-
         return back()->with('flash','comment has gone for good');
-
     }
 }

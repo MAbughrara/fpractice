@@ -25,7 +25,6 @@ class ParticipateInForumTest extends TestCase
 
     function an_authenticated_user_may_participate_in_forum_thread()
     {
-
         $this->be($user = factory('App\User')->create());
         $thread = create('App\Thread');
         $reply = make('App\Reply');
@@ -50,7 +49,7 @@ class ParticipateInForumTest extends TestCase
 
     /** @test */
 
-    public function unauthenticated_user_connot_deltete_replies()
+    public function unauthenticated_user_cannot_deltete_replies()
     {
         $this->withExceptionHandling();
         $reply= create('App\Reply');
@@ -62,14 +61,42 @@ class ParticipateInForumTest extends TestCase
 
 
     }
-    /** @test */
 
-    public function an_authenticated_user_connot_deltete_replies()
+    /** @test */
+    public function an_authenticated_user_can_deltete_replies()
     {
         $this->signIn();
         $reply= create('App\Reply',['user_id'=>Auth()->id()]);
         $this->delete('/replies/'.$reply->id)->assertStatus(302);
         $this->assertDatabaseMissing('replies',['id'=>$reply->id]);
+
+    }
+
+
+    /** @test */
+
+    public function unauthenticated_user_cannot_update_replies()
+    {
+        $this->withExceptionHandling();
+        $reply= create('App\Reply');
+        $this->patch('/replies/'.$reply->id)
+            ->assertRedirect('login');
+
+        $this->signIn()->patch('/replies/'.$reply->id)
+            ->assertStatus(403);
+
+
+    }
+    /** @test */
+    public function an_authenticated_user_can_update_replies()
+    {
+        $this->signIn();
+        $reply= create('App\Reply',['user_id'=>Auth()->id()]);
+        $updateBody='you have been hti dude';
+
+        $this->patch("/replies/{$reply->id}",['body'=>$updateBody]);
+
+        $this->assertDatabaseHas('replies',['id'=>$reply->id,'body'=>$updateBody]);
 
     }
 }
