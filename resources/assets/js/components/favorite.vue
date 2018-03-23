@@ -1,7 +1,7 @@
 <template>
     <button type="submit" :class="classes" @click="toggle">
         <span class="glyphicon glyphicon-heart">Likes</span>
-        <span v-text="favoritesCount"></span>
+        <span v-text="count"></span>
     </button>
 </template>
 
@@ -10,15 +10,15 @@
         props:['reply'],
         data(){
             return{
-                favoritesCount:this.reply.favoritesCount,
-                isFavorited:this.reply.isFavorited
+                count:this.reply.favoritesCount,
+                active:this.reply.isFavorited
             }
 
         },
 
         computed:{
             classes(){
-                return ['btn ',this.isFavorited?'btn-primary':'btn-default']
+                return ['btn ',this.active?'btn-primary':'btn-default']
             },
             endpoint(){
                 return '/replies/'+ this.reply.id +'/favorites'
@@ -27,18 +27,18 @@
 
         methods: {
             toggle(){
-                return this.isFavorited? this.destroy():this.create();
+                return this.active? this.destroy():this.create();
                 },
 
                 create(){
                     axios.post(this.endpoint)
-                    this.isFavorited=true
-                    this.favoritesCount++
+                    this.active=true
+                    this.count++
                 },
                 destroy(){
                     axios.delete(this.endpoint);
-                    this.isFavorited=false;
-                    this.favoritesCount--;
+                    this.active=false;
+                    this.count--;
                 }
 
         }

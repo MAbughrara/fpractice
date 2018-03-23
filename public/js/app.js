@@ -47657,15 +47657,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['reply'],
     data: function data() {
         return {
-            favoritesCount: this.reply.favoritesCount,
-            isFavorited: this.reply.isFavorited
+            count: this.reply.favoritesCount,
+            active: this.reply.isFavorited
         };
     },
 
 
     computed: {
         classes: function classes() {
-            return ['btn ', this.isFavorited ? 'btn-primary' : 'btn-default'];
+            return ['btn ', this.active ? 'btn-primary' : 'btn-default'];
         },
         endpoint: function endpoint() {
             return '/replies/' + this.reply.id + '/favorites';
@@ -47674,17 +47674,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         toggle: function toggle() {
-            return this.isFavorited ? this.destroy() : this.create();
+            return this.active ? this.destroy() : this.create();
         },
         create: function create() {
             axios.post(this.endpoint);
-            this.isFavorited = true;
-            this.favoritesCount++;
+            this.active = true;
+            this.count++;
         },
         destroy: function destroy() {
             axios.delete(this.endpoint);
-            this.isFavorited = false;
-            this.favoritesCount--;
+            this.active = false;
+            this.count--;
         }
     }
 });
@@ -47709,7 +47709,7 @@ var render = function() {
         _vm._v("Likes")
       ]),
       _vm._v(" "),
-      _c("span", { domProps: { textContent: _vm._s(_vm.favoritesCount) } })
+      _c("span", { domProps: { textContent: _vm._s(_vm.count) } })
     ]
   )
 }
