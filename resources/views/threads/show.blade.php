@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <thread-view inline-tamplate>
     <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -34,10 +35,11 @@
                     </div>
                 </div>
 
-                @foreach( $replies as $reply)
-                    @include('threads.reply')
-                @endforeach
-                {{$replies->links()}}
+                <replies :data="{{$thread->replies}}"></replies>
+                {{--@foreach( $replies as $reply)--}}
+                    {{--@include('threads.reply')--}}
+                {{--@endforeach--}}
+                {{--{{$replies->links()}}--}}
                 <hr>
                 @if(auth()->check())
                     <form action="{{$thread->path().'/replies'}}" method="post">
@@ -68,4 +70,5 @@
         <p class="text-center">Please <a href='{{route('login')}}'>sign in </a>to participate in this discussion.
         </p>
     @endif
+    </thread-view>
 @endsection
