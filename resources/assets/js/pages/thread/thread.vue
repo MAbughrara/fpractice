@@ -1,8 +1,7 @@
 
 <script>
-    import replies from '../../components/replies';
+    import Replies from '../../components/Replies.vue';
     export default {
-
-        components: {replies}
+        components:{Replies},
     }
 </script>

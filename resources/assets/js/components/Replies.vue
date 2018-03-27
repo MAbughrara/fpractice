@@ -2,17 +2,17 @@
 
     <div>
         <div v-for="reply in items">
-            <reply :data="reply"></reply>
+            <Reply :data="reply"></Reply>
         </div>
     </div>
 </template>
 
 <script>
-    import reply from './reply.vue';
+    import Reply from './Reply.vue';
     export default {
 
         props:['data'],
-        components:{reply},
+        components:{Reply},
 
 
         data(){
