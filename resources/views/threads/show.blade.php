@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <thread-view inline-tamplate>
+    <thread-view inline-template>
     <div class="container">
         <div class="row">
             <div class="col-md-8">

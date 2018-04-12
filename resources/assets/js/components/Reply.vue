@@ -30,21 +30,21 @@
             </div>
 
             <!--@can('update',$reply)-->
-            <!--<div class="card card-footer">-->
+            <div class="card card-footer">
 
-                <!--<div class="level">-->
-                    <!--<button class="btn btn-sm mr-2" @click="editing=true">Edit</button>-->
-                    <!--<button class="btn btn-sm btn-danger mr-2" @click="destroy">Delete</button>-->
+                <div class="level">
+                    <button class="btn btn-sm mr-2" @click="editing=true">Edit</button>
+                    <button class="btn btn-sm btn-danger mr-2" @click="destroy">Delete</button>
 
-                <!--</div>-->
+                </div>
 
-            <!--</div>-->
+            </div>
             <!--@endcan-->
         </div>
 </template>
 
 <script>
-    import Favorite from './Favorite.vue';
+    import Favorite from '../components/Favorite.vue';
     export default {
         props:['data'],
         components:{Favorite},

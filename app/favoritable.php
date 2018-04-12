@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\model;
 trait favoritable
 {
 
-    protected static function bootFavoritable(){
+    protected static function bootFavoritable()
+    {
         static::deleting(function($model){
            $model->favorites->each->delete();
         });
@@ -28,11 +29,11 @@ trait favoritable
             ]);
         }
     }
+
     public function unfavorite()
     {
         $attributes = ['user_id' => auth()->id()];
             $this->favorites()->where($attributes)->get()->each->delete();
-
     }
 
     public function isFavorited()
@@ -40,7 +41,8 @@ trait favoritable
         return !! $this->favorites->where('user_id', auth()->id())->count();
     }
 
-    public function getIsFavoritedAttribute(){
+    public function getIsFavoritedAttribute()
+    {
         return $this->isFavorited();
     }
 

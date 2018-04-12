@@ -1,8 +1,8 @@
 <template>
 
     <div>
-        <div v-for="reply in items">
-            <Reply :data="reply"></Reply>
+        <div v-for="(reply ,index) in items">
+            <Reply :data="reply" @deteted="remove(index)"></Reply>
         </div>
     </div>
 </template>
@@ -19,7 +19,12 @@
             return{
                 items: this.data
             }
-        }
+        },
 
+        methods:{
+            remove(index){
+                this.items.splice(index,1)
+            },
+        }
     }
 </script>
