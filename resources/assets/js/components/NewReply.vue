@@ -19,18 +19,19 @@
 
 <script>
     export default {
-
         data(){
             return{
                 body:'',
-                endpoint:'/threads/molestiae/6'
+                endpoint:'/threads/modi/14'
             };
         },
 
         methods:{
             addreply(){
 
-                axios.post(this.endpoint,{body:this.body})
+                axios.post(this.endpoint,{
+                    body:this.body
+                })
                     .then(({data})=>{
                         this.body='';
                         flash('Your reply has been posted');
