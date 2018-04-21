@@ -55,7 +55,6 @@ class RepliesController extends Controller
         }
 
         return back()->with('flash','your reply is here!');
-
     }
 
     /**

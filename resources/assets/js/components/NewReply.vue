@@ -1,5 +1,6 @@
 <template>
 
+        <div v-if="signedIn">
         <div class="form-group">
 
             <textarea
@@ -12,7 +13,8 @@
             </textarea>
             <button class="btn btn-default"
             type="submit"
-            @click='addreply'>Reply</button>
+            @click='addReply'>Reply</button>
+        </div>
         </div>
 
 </template>
@@ -22,12 +24,20 @@
         data(){
             return{
                 body:'',
-                endpoint:'/threads/modi/14'
+                endpoint:'/threads/modi/14/replies'
             };
         },
 
+        computed:{
+
+            signedIn(){
+                return Window.App.signedIn;
+            }
+
+        },
+
         methods:{
-            addreply(){
+            addReply(){
 
                 axios.post(this.endpoint,{
                     body:this.body

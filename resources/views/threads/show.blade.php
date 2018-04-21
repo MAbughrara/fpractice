@@ -35,6 +35,7 @@
                     </div>
                 </div>
 
+
                 <Replies :data="{{$thread->replies}}"></Replies>
                 {{--@foreach( $replies as $reply)--}}
                     {{--@include('threads.reply')--}}
